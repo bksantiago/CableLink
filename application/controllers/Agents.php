@@ -62,8 +62,8 @@ class Agents extends CI_Controller{
             'created_date' => date("Y-m-d H:i:s"),
             'created_by' => $this->session->userdata("user")->id
         );
-        $this->db->update("announcement_tb", $data);
-        echo "update;top";
+        $this->db->insert("announcement_tb", $data);
+        echo "save;top";
     }
     
     function save(){

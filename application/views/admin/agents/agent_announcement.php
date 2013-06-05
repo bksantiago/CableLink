@@ -10,15 +10,13 @@ $(document).ready(function(){
             <div class="control-label">Header</div>
             <div class="controls">
                 <input type="text" class="span3" placeholder="Announcement header"
-                       name="header" value="<?php echo $announcement->header; ?>"/>
+                       name="header" value=""/>
             </div>
         </div>
         <div class="control-group">
             <div class="control-label">Content</div>
             <div class="controls">
-                <textarea class="span7" rows="10" placeholder="Announcement Contents" name="information"><?php
-                    echo $announcement->information;
-                ?></textarea>
+                <textarea class="span7" rows="10" placeholder="Announcement Contents" name="information"></textarea>
             </div>
         </div>
         <div class="control-group">
@@ -29,3 +27,20 @@ $(document).ready(function(){
         </div>
     </fieldset>
 </form>
+<h3>PREVIOUS ANNOUNCEMENT</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Posted By : <?php echo $announcement->createdBy->firstName; ?></th>
+            <th>Date Posted : <?php echo date("F d, Y h:i A", strtotime($announcement->createdDate)); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2"><?php echo $announcement->header; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2"><div class="expand announce"><?php echo $announcement->information; ?></div></td>
+        </tr>
+    </tbody>
+</table>

@@ -110,6 +110,7 @@
         <h5>TICKET HISTORY</h5>
         <table class="table table-bordered">
             <thead>
+                <th>Agent</th>
                 <th>Date Assigned</th>
                 <th>Date Ended</th>
                 <th>Agent Notes</th>
@@ -118,6 +119,9 @@
                 <?php 
                     foreach($ticket->ticketsAssignedTb as $row){
                         echo "<tr>";
+                        echo "<td><a href='profile?id=" . $row->assignedTo->id . "' class='short-link'>" . 
+                                $row->assignedTo->firstName . 
+                                " (" . $row->assignedTo->positionTb->code . ")</a></td>";
                         echo "<td>" . date("F d, Y h:i A", strtotime($row->dateStart)) . "</td>";
                         if(empty($row->dateEnd)) echo "<td>--</td>";
                         else echo "<td>" . date("F d, Y h:i A", strtotime($row->dateEnd)) . "</td>";

@@ -34,6 +34,13 @@ body{
 textarea{
     resize: none;
 }
+
+.boxsize {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
 .navbar-inner{
     background: #ffffff url("../images/topGradient.png") repeat-x !important;
     font-family: "SEGOE UI";
@@ -160,7 +167,31 @@ tr .table-center{
 .profile-pic:hover .upload{
     opacity: 1;
 }
+
 .upload:hover{text-decoration: underline;cursor: hand;}
+
+.short-link{
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.short-link:hover{
+    text-decoration: none;
+    color: #aaa;
+}
+
+.announce{
+    white-space: pre-wrap;
+}
+
+.comment-pic{
+    padding: 10px;
+}
+
+.comment-pic img{
+    max-height: 60px;
+}
 
 footer{
     margin: 15px;

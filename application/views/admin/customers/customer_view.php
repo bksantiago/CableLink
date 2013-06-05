@@ -94,6 +94,7 @@
             <thead>
                 <tr>
                     <th>Ticket #</th>
+                    <th>Agent</th>
                     <th>Date Started</th>
                     <th>Date Ended</th>
                     <th>Status</th>
@@ -104,12 +105,17 @@
                 $myTickets = $customer->getMyTickets();
                 if(empty($myTickets)){ ?>
                 <tr>
-                    <td colspan="4" class="table-center">No Records Found</td>
+                    <td colspan="5" class="table-center">No Records Found</td>
                 </tr>
                 <?php } else { 
                     foreach($myTickets as $row){
                         echo "<tr>";
-                        echo "<td>" . $row->id . "</td>";
+                        echo "<td><a href='Tickets/view/" . $row->id . "' class='open-modal short-link' 
+                                title='View Complete Details'
+                                id='Ticket Information'>" . $row->id . "</a></td>";
+                        echo "<td><a href='profile?id=" . $row->assignedTb->id . "' class='short-link'>" . 
+                                $row->assignedTb->firstName . 
+                                " ( " . $row->assignedTb->positionTb->code . " )</a></td>";
                         echo "<td>" . date("F d, Y h:i A", strtotime($row->dateStart)) . "</td>";
                         if(empty($row->dateEnd)){
                            echo "<td>--</td>";

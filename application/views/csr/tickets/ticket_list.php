@@ -22,8 +22,9 @@
                     echo "<tr>";
                     echo "<td>" . $row->id . "</td>";
                     echo "<td>" . $row->accountTb->id . "</td>";
-                    echo "<td>" . $row->assignedTb->firstName . 
-                            " ( " . $row->assignedTb->positionTb->code . " )</td>";
+                    echo "<td><a href='profile?id=" . $row->assignedTb->id . "' class='short-link'>" . 
+                            $row->assignedTb->firstName . 
+                            " ( " . $row->assignedTb->positionTb->code . " )</a></td>";
                     echo "<td>" . date('F d, Y h:i A' ,strtotime($row->dateStart)) . "</td>";
                     
                     if(empty($row->dateEnd))

@@ -23,7 +23,10 @@ class announcement_tb extends CI_Model{
     }
     
     public function get(){
-        $query = $this->db->get("announcement_tb");
+        $this->db->from("announcement_tb");
+        $this->db->order_by("created_date", "DESC");
+        $this->db->limit(1);
+        $query = $this->db->get();
         
         foreach($query->result() as $row){
             $this->id = $row->id;
@@ -32,7 +35,24 @@ class announcement_tb extends CI_Model{
             $this->createdDate = $row->created_date;
             $this->createdBy = $this->user_tb->getById($row->created_by);
         }
-    return $this;
+        return $this;
+    }
+    
+    public function getAll(){
+        $this->db->order_by("created_date", "DESC");
+        $query = $this->db->get("announcement_tb");
+        
+        $announcements = array();
+        foreach($query->result() as $row){
+            $a = new announcement_tb();
+            $a->id = $row->id;
+            $a->header = $row->header;
+            $a->information = $row->information;
+            $a->createdDate = $row->created_date;
+            $a->createdBy = $this->user_tb->getById($row->created_by);
+            $announcements[] = $a;
+        }
+        return $announcements;
     }
 }
 
