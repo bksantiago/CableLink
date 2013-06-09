@@ -16,10 +16,10 @@
                         <li><a href="Agents"><i class="icon-eye-open icon-white"></i> Agents</a></li>
                     <?php } else { ?>
                         <li><a href="Tickets"><i class="icon-list-alt icon-white"></i> Tickets</a></li>
-                        <?php if (!empty($assign)) { ?>
-                            <li><a href="Tickets?n=<?php echo $assign; ?>">
+                        <?php if ($user->getAssignedCount() > 0) { ?>
+                            <li><a href="Tickets?n=<?php echo $user->getAssignedCount(); ?>">
                                     <i class="icon-info-sign icon-white"></i> Assigned Tickets
-                                    <div class="icon-notif"><?php echo $assign; ?></div></a></li>
+                                    <div class="icon-notif"><?php echo $user->getAssignedCount(); ?></div></a></li>
                         <?php } ?>
                     <?php } ?>
                 </ul>
@@ -27,8 +27,14 @@
 
                     <li class="dropdown">
                         <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            Welcome | <?php echo $user->firstName . " ( " . $user->positionTb->code . " )"; ?>
-                            <img src="images/profile/blank_male.gif" style="padding: 0 5px; height: 17px;"/>
+                            Welcome | <?php echo $user->firstName . " ( " . $user->positionTb->code . " )"; 
+                            if(!file_exists('./uploads/' . $user->id . '.jpg')){
+                                $imgUrl = "images/profile/blank_male.gif";
+                            } else {
+                                $imgUrl = "./uploads/" . $user->id . ".jpg";
+                            }
+                            ?>
+                            <img src="<?php echo $imgUrl; ?>" style="padding: 0 5px; height: 17px;"/>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">

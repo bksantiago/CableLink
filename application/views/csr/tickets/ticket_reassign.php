@@ -6,7 +6,7 @@
             <th>Name</th>
             <th>Position</th>
             <th>Tickets Handled</th>
-            <th><i class="icon-cog icon-white"></i></th>
+            <th class="table-center"><i class="icon-cog icon-white"></i></th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
                 echo "<td>" . $row->getCompleteName() . "</td>";
                 echo "<td>" . $row->positionTb->position . "</td>";
                 echo "<td>" . $ticket->getAssignCount($row->id) . "</td>";
-                echo "<td>
+                echo "<td class='table-center'>
                         <form id='confirm-form' class='clearfix' method='POST' action='Tickets/doReassign'>
                             <input type='hidden' value='" . $ticketId . "' name='ticketId'/>
                             <input type='hidden' value='" . $row->id . "' name='agentId'/>

@@ -15,6 +15,7 @@ class Profile extends CI_Controller{
     public function __construct() {
         parent::__construct();
         $this->load->model("user_tb", "", TRUE);
+        $this->load->model("ticket_tb", "", TRUE);
         $this->load->library("session");
         
         //validate if Login
@@ -32,6 +33,7 @@ class Profile extends CI_Controller{
         $head["title"] = $user->firstName . "'s Profile";
         $header["user"] = $this->session->userdata("user");
         $body["user"] = $user;
+        $body["assigned"] = $this->ticket_tb->getAssigned($user->id);
         
         if($user->id == $this->session->userdata("user")->id){
             $body["myProfile"] = 1;

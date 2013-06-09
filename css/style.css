@@ -193,6 +193,15 @@ tr .table-center{
     max-height: 60px;
 }
 
+.details{
+    font-size: 70%;
+    opacity: 0;
+}
+
+.comment-pic:hover .details{
+    opacity: 1;
+}
+
 footer{
     margin: 15px;
     padding: 15px;

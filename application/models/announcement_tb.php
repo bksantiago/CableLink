@@ -16,10 +16,12 @@ class announcement_tb extends CI_Model{
     var $information = "";
     var $createdDate = "";
     var $createdBy = "";
+    var $comments = "";
     
     public function __construct() {
         parent::__construct();
         $this->load->model("user_tb", '', TRUE);
+        $this->load->model("comment_tb", "", TRUE);
     }
     
     public function get(){
@@ -34,6 +36,7 @@ class announcement_tb extends CI_Model{
             $this->information = $row->information;
             $this->createdDate = $row->created_date;
             $this->createdBy = $this->user_tb->getById($row->created_by);
+            $this->comments = $this->comment_tb->getByAnnouncementId($row->id);
         }
         return $this;
     }
@@ -50,6 +53,7 @@ class announcement_tb extends CI_Model{
             $a->information = $row->information;
             $a->createdDate = $row->created_date;
             $a->createdBy = $this->user_tb->getById($row->created_by);
+            $a->comments = $this->comment_tb->getByAnnouncementId($row->id);
             $announcements[] = $a;
         }
         return $announcements;

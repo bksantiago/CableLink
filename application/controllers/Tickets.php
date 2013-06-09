@@ -32,7 +32,6 @@ class Tickets extends CI_Controller{
         $head["title"] = "Tickets Page";
         $header["user"] = $this->session->userdata("user");
         
-        $header["assign"] = $this->ticket_tb->getAssignCount($this->session->userdata("user")->id);
         $body["n"] = $this->input->get("n");
         
         $this->load->view('templates/heads', $head);

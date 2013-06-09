@@ -26,6 +26,11 @@ class User_tb extends CI_Model{
         $position = $this->load->model("position_tb", "", TRUE);
     }
     
+    function getAssignedCount() {
+        $this->load->model("ticket_tb", "", TRUE);
+        return $this->ticket_tb->getAssignCount($this->id);
+    }
+    
     function login($username, $password){
         $this->db->select('*');
         $this->db->from("users_tb");
@@ -54,7 +59,7 @@ class User_tb extends CI_Model{
     }
     
     public function getAllForReassign($positionId){
-        $query = $this->db->get_where("users_tb", array('position >' => $positionId));
+        $query = $this->db->get_where("users_tb", array('position >' => $positionId, 'position <' => 5));
         $result = array();
         foreach($query->result() as $row){
             $result[] = $this->convertToUser($row);
