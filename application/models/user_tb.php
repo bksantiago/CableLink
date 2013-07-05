@@ -67,6 +67,15 @@ class User_tb extends CI_Model{
         return $result;
     }
     
+    public function getContractors(){
+        $query = $this->db->get_where("users_tb", array("position =" => 5));
+        $result = array();
+        foreach($query->result() as $row){
+            $result[] = $this->convertToUser($row);
+        }
+        return $result;
+    }
+    
     public function getById($id){
         $this->db->select("*");
         $this->db->from("users_tb");

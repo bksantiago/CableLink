@@ -31,8 +31,45 @@
         <div class="span7"><?php echo $user->positionTb->position; ?></div>
     </div>
     <div class="row-fluid">
-        <div class="span4">
-
-        </div>
+        <div class="span12">&nbsp;</div>
     </div>
+    <?php if(!empty($assigned)) {?>
+    <h4>TICKETS ASSIGNED</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ticket #</th>
+                <th>Account #</th>
+                <th>Date Started</th>
+                <th>Date Ended</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach($assigned as $row){
+                    echo "<tr>";
+                    echo "<td><a href='Tickets/view/" . $row->id . "' class='open-modal short-link' 
+                            title='View Complete Details'
+                            id='Ticket Information'>" . $row->id . "</a></td>";
+                    echo "<td><a href='Customers/view/" . $row->accountTb->id . "' class='open-modal short-link'
+                        id='Customer Information' title='View Customer Details'>" . 
+                            $row->accountTb->id . "</a></td>";
+                    echo "<td>" . date("F d, Y h:i A", strtotime($row->dateStart)) . "</td>";
+                    if(empty($row->dateEnd)){
+                       echo "<td>--</td>";
+                    } else {
+                        echo "<td>" . date("F d, Y h:i A", strtotime($row->dateEnd)) . "</td>";
+                    }
+                    if(!empty($row->dateEnd)){
+                        echo "<td>Resolved</td>";
+                    } else {
+                        echo "<td>Pending</td>";
+                    }
+                    echo "</tr>";
+                }
+                 ?>
+        </tbody>
+    </table>
+    <?php } ?>
 </div>

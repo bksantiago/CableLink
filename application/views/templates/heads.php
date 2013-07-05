@@ -14,6 +14,7 @@
     <script src="bootstrap/js/bootstrap-datepicker.js"></script>
     <script src="js/jquery.validate.js"></script>
     <script src="js/jquery.readmore.js"></script>
+    <script src="js/bootstrap-nav.js"></script>
     <script src="js/common.js"></script>
 </head>
 <body>

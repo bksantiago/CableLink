@@ -27,7 +27,7 @@ class Agents extends CI_Controller{
             }
         }
         if(!$proceed){
-            header("Location: " . base_url());
+            sendHome();
         }
     }
     
@@ -80,6 +80,11 @@ class Agents extends CI_Controller{
         );
         $this->db->insert("users_tb", $data);
         echo "save;top";
+    }
+    
+    function contractors(){
+        $body["contractors"] = $this->user_tb->getContractors();
+        $this->load->view("admin/agents/agent_contractors", $body);
     }
 }
 ?>

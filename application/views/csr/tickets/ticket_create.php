@@ -136,6 +136,10 @@
             <div class="controls">
                 <?php if(empty($ticket->dateEnd) && !isset($view))
                     echo "<button type='submit' class='btn btn-primary btn-large'>Mark as Resolve</button>";
+                    echo "&nbsp;";
+                    echo "<a href='Tickets/dispatch/" . $ticket->id . "' 
+                        class='btn btn-primary btn-large open-modal'title='View Contractors' 
+                        id='List of Available Contractors'>Create Dispatcher Order</a>";
                 ?>
             </div>
         </div>

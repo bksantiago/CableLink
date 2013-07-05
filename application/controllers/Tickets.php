@@ -17,6 +17,7 @@ class Tickets extends CI_Controller{
         $this->load->model("customer_tb", "", TRUE);
         $this->load->model("ticket_tb", "", TRUE);
         $this->load->model("ticket_assinged_tb", "ta_tb", TRUE);
+        $this->load->model("contractor_city_tb", "c_city_tb", TRUE);
         $this->load->library("session");
         
         $proceed = false;
@@ -120,6 +121,13 @@ class Tickets extends CI_Controller{
         );
         $this->ta_tb->saveSub($subData);
         msgRedirect("Ticket Successfully Reassigned", base_url() . "Tickets");
+    }
+    
+    public function dispatch($ticketId){
+        $ticket = $this->ticket_tb->getById($ticketId);
+        $contractors = $this->c_city_tb->getByFranchiseId($ticket->accountTb->franchiseTb->id);
+        $body["contractors"] = $contractors;
+        $this->load->view("csr/tickets/ticket_dispatch", $body);
     }
 }
 

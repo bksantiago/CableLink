@@ -1,3 +1,10 @@
+<script>
+$(document).ready(function(){
+    $(".table").tableNav({
+        itemsPerPage: 10
+    });
+});
+</script>
 <h2>CUSTOMERS LIST
     <form class="navbar-search pull-right" id="search-form">
         <input type="text" class="search-query" placeholder="Search" id="txt-search"
@@ -48,3 +55,4 @@
         ?>
     </tbody>
 </table>
+<div class="pagination"></div>

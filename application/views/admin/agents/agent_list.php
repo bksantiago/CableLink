@@ -1,3 +1,10 @@
+<script>
+$(document).ready(function(){
+    $(".table").tableNav({
+        itemsPerPage: 10
+    });
+});
+</script>
 <h2>AGENTS LIST</h2>
 <table class="table">
     <thead>
@@ -26,3 +33,4 @@
         ?>
     </tbody>
 </table>
+<div class="pagination"></div>
