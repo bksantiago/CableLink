@@ -46,6 +46,20 @@ class contractor_city_tb extends CI_Model {
         }
         return $data;
     }
+
+    public function getByUserId($id){
+        $query = $this->db->get_where("contractor_city_tb", array("user_id" => $id));
+        $data = array();
+        
+        foreach($query->result() as $row){
+            $cc = new contractor_city_tb();
+            $cc->id = $row->id;
+            $cc->userTb = $this->user_tb->getById($row->user_id);
+            $cc->city = $this->city_tb->getById($row->city_id);
+            $data[] = $cc;
+        }
+        return $data;
+    }
 }
 
 ?>

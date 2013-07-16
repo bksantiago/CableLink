@@ -5,7 +5,12 @@ $(document).ready(function(){
     });
 });
 </script>
-<h2>AGENTS LIST</h2>
+<h2>AGENTS LIST
+    <form class="navbar-search pull-right" id="search-form">
+        <input type="text" class="search-query" placeholder="Search" id="txt-search"
+               autofocus value="<?php if(isset($search)) { echo $search; } ?>"/>
+    </form>
+</h2>
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +31,12 @@ $(document).ready(function(){
                 echo "<td>" . $row->email . "</td>";
                 echo "<td>" . $row->contactNo . "</td>";
                 echo "<td>" . $row->positionTb->position . "</td>";
-                echo "<td><a href='Profile?id=$row->id' title='View Complete Profile'>
+                echo "<td>";
+                echo "<a href='Agents/edit/" . $row->id . "' class='open-modal'
+                                    title='Edit Agent Details' id='Agent Information'>
+                                    <i class='icon-edit icon-white'></i>
+                                </a>";
+                echo "<a href='Profile?id=" . $row->id ."' title='View Complete Profile'>
                         <i class='icon-search icon-white'></i></a></td>";
                 echo "</tr>";
             }

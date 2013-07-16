@@ -49,6 +49,32 @@ class User_tb extends CI_Model{
         }
     }
     
+    public function getSearch($txt){
+        $data = array(
+            'username' => $txt,
+            'first_name' => $txt,
+            'middle_name' => $txt,
+            'last_name' => $txt,
+            'email' => $txt,
+            'contact_no' => $txt
+        );
+        $this->db->from("users_tb");
+        $this->db->like("id", $txt, 'none');
+        $query = $this->db->get();
+
+        if($query->num_rows() == 0){
+            $this->db->from("users_tb");
+            $this->db->or_like($data);
+            $query = $this->db->get();
+        }
+        
+        $customers = array();
+        foreach($query->result() as $row){
+            $customers[] = $this->convertToUser($row);
+        }
+        return $customers;
+    }
+
     public function getAll(){
         $query = $this->db->get("users_tb");
         $result = array();

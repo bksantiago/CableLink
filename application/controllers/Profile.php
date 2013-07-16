@@ -16,6 +16,8 @@ class Profile extends CI_Controller{
         parent::__construct();
         $this->load->model("user_tb", "", TRUE);
         $this->load->model("ticket_tb", "", TRUE);
+        $this->load->model("contractor_city_tb", "cc_tb", TRUE);
+        $this->load->model("contractor_schedule_tb", "cs_tb", TRUE);
         $this->load->library("session");
         
         //validate if Login
@@ -37,6 +39,12 @@ class Profile extends CI_Controller{
         
         if($user->id == $this->session->userdata("user")->id){
             $body["myProfile"] = 1;
+        }
+
+        if($user->positionTb->id == 5){
+            $body["cities"] = $this->cc_tb->getByUserId($user->id);
+            $body["schedules"] = $this->cs_tb->getByUserId($user->id);
+            $body["scheduleNum"] = convertToNumericalSchedule($this->cs_tb->getByUserId($user->id));
         }
         
         $this->load->view('templates/heads', $head);

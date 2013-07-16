@@ -33,6 +33,51 @@
     <div class="row-fluid">
         <div class="span12">&nbsp;</div>
     </div>
+    <?php if($user->positionTb->id == 5){ ?>
+    <h3>Cities Assigned: </h3>
+    <h4 style='margin-left: 20px'>
+        <?php 
+            for($i = 0 ; $i < count($cities); $i++){
+                echo $cities[$i]->city->city;
+                if($i < count($cities) - 1)
+                    echo ", ";
+            }
+        ?>
+    </h4>
+
+    <h3>Schedule</h3>
+    <?php
+        echo "<table class='table table-bordered'>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Day</th>";
+        echo "<th colspan='4'>Time</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        $day = "";
+        $ctrTime = 0;
+        for($i = 0; $i < count($schedules); $i++) {
+            if($day != $schedules[$i]->schedDay->day){
+                $ctrTime = 0;
+                $day = $schedules[$i]->schedDay->day;
+                echo "<tr>";
+                echo "<td>" . $day . "</td>";
+            }
+
+            //if($schedules[$i]->schedTime->id == 1){
+                echo "<td>" . $schedules[$i]->schedTime->schedule . "</td>";
+            //}
+
+            if($i == count($schedules) - 1){
+                echo "</tr>";
+            } else if($day != $schedules[$i+1]->schedDay->day){
+                echo "</tr>";
+            }
+        }
+        echo "</tbody>";
+        echo "</table>";
+    } ?>
     <?php if(!empty($assigned)) {?>
     <h4>TICKETS ASSIGNED</h4>
     <table class="table table-bordered">

@@ -128,7 +128,6 @@ $(document).ready(function(){
                     notes: me.val()
                 },
                 success: function(response){
-                    console.log(response);
                     if(response == "ok"){
                         me.parent("div").append("<div class='push'><br />" +
                             "<div class='alert alert-success'>Notes Saved!</div></div>");
@@ -181,16 +180,20 @@ function saveValidatedForm(url, form){
                 var m = response.split(";");
                 var msg = $("#" + form).attr("title");
                 $('.control-group').removeClass('success');
-                console.log(response);
-                if(m[0] == "save")
+                if(m[0] == "save"){
                     $("#" + form)[0].reset();
+                    $(".contractor-group").hide();
+                    $("input[type=checkbox]").prop("checked", false);
+                }
                 if(m[1] == "top")
                     $("#" + form).prepend("<div class='alert alert-success' id='alerts'>"+msg+"</div>");
                 else if(m[1] == "bottom")
-                    $("#" + form).append("<div class='alert alert-success'>"+msg+"</div>");
+                    $("<div class='alert alert-success'>"+msg+"</div>").insertBefore("#" + form + " div:last");
+                    //$("#" + form).append("<div class='alert alert-success'>"+msg+"</div>");
+            }, error: function(response){
+                $("#" + form).append("<div class='alert alert-error'>An error has occur, Please try again.</div>");
             }
         }).done(function(){
-            console.log($("#alerts").length);
             $("#" + form).css("opacity", 1);
             $("#btn-submit").text(originalSubmit);
             $("#btn-submit").prop("disabled", false);
