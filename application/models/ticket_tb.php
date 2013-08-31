@@ -18,6 +18,7 @@ class Ticket_tb extends CI_Model{
     var $dateEnd = "";
     var $ticketsAssignedTb = "";
     var $singleAssignedTb = "";
+    var $applicationType = "";
     
     public function __construct() {
         parent::__construct();
@@ -61,6 +62,18 @@ class Ticket_tb extends CI_Model{
         }
         return $tickets;
     }
+
+    public function getAllLatest(){
+        $this->db->from("tickets_tb");        
+        $this->db->order_by("date_start", "desc");
+        $query = $this->db->get();
+
+        $tickets = array();
+        foreach($query->result() as $row){
+            $tickets[] = $this->convertToRow($row);
+        }
+        return $tickets;
+    }
     
     public function getAssigned($userId){
         $this->db->from("tickets_tb");
@@ -98,6 +111,17 @@ class Ticket_tb extends CI_Model{
         $this->db->where("assigned_to", $oldAgentId);
         $this->db->update("tickets_tb", array('assigned_to' => $newAgentId));
     }
+
+    public function getDispatches(){
+        $this->load->model("dispatch_tb", '', TRUE);
+        return $this->dispatch_tb->getDispatchByTicketId($this->id);
+    }
+
+    public function getUnifinishedDispatches(){
+        $this->load->model("dispatch_tb", '', TRUE);
+        return $this->dispatch_tb->getUnfinishedDispatchByTicketId($this->id);
+    }
+    
     
     private function convertToRow($row){
         $ticket = new Ticket_tb();
@@ -108,7 +132,21 @@ class Ticket_tb extends CI_Model{
         $ticket->dateEnd = $row->date_end;
         $ticket->ticketsAssignedTb = $this->ta_tb->getByTicketId($row->id);
         $ticket->singleAssignedTb = $this->ta_tb->getByTicketAndAssignedId($row->id, $row->assigned_to);
+        $ticket->applicationType = $row->application_type;
         return $ticket;
+    }
+
+    public function getStatus(){
+        if(!empty($this->dateEnd)){
+            return "Closed";
+        } else {
+            $d = $this->getDispatches();
+            if(!empty($d)){
+                return "Pending";
+            } else {
+                return "Open";
+            }
+        }
     }
 }
 

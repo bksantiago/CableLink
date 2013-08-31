@@ -38,7 +38,7 @@ class Customers extends CI_Controller{
         $this->load->view('templates/footer');
     }
     
-    public function customer_list(){
+    public function customer_list($f = null){
         if($this->input->get("search") != ""){
             $body["search"] = $this->input->get("search");
             $body["customers"] = $this->customer_tb->getSearch($body["search"]);
@@ -49,7 +49,7 @@ class Customers extends CI_Controller{
         $body["user"] = $this->session->userdata("user");
         
         //for Ticket Creation;
-        if($this->input->get("f") == 1){
+        if($f == 1){
             $body["forTicket"] = 1;
         }
         

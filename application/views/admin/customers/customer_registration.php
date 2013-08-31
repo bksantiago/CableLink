@@ -1,12 +1,22 @@
 <script>
 $(document).ready(function(){
-    $("#datepicker").datepicker();
     saveValidatedForm("Customers/save", "customer-registration");
+    $("[name=firstname]").rules("add", {alphanumeric: "Enter a valid name"});
+    $("[name=middlename]").rules("add", {alphanumeric: "Enter a valid name"});
+    $("[name=lastname]").rules("add", {alphanumeric: "Enter a valid name"});
+
+    $(".datepicker").datepicker({
+        dateFormat: 'mm/dd/yy',
+        maxDate: '-1d',
+        onClose: function(dateText, inst) {
+            $(this).datepicker('option', 'dateFormat', 'mm/dd/yy');                
+        }
+    });
 });
 </script>
 <?php if(isset($customer)){ $reg = false; } else { $reg = true; } ?>
 <form class="form-horizontal" id="customer-registration" method="POST"
-      title="<?php if($reg) {echo "Registration Successful!"; } else { echo "Update Successful!"; }?>">
+      data-title="<?php if($reg) {echo "Registration Successful!"; } else { echo "Update Successful!"; }?>">
     <fieldset>
         <legend>
             <?php if($reg) {?>
@@ -64,7 +74,7 @@ $(document).ready(function(){
                         <option value="1" <?php if(!$reg && $customer->applicationType == 1) echo "selected"; ?>>
                             Internet</option>
                         <option value="2" <?php if(!$reg && $customer->applicationType == 2) echo "selected"; ?>>
-                            Both</option>
+                            Internet and Cable</option>
                     </select>
                 </label>
                 <span class="help-inline"></span>
@@ -74,7 +84,7 @@ $(document).ready(function(){
             <label class="control-label"><span class="req">*</span> Subscribers Name</label>
             <div class="controls">
                 <select class="span1" required name="prefix">
-                    <option selected disabled>--</option>
+                    <?php if($reg) echo "<option selected disabled>--</option>"; ?>                    
                     <option value="Mr." <?php if(!$reg && $customer->prefix == "Mr.") echo "selected"; ?>>
                         Mr.</option>
                     <option value="Ms." <?php if(!$reg && $customer->prefix == "Ms.") echo "selected"; ?>>
@@ -117,8 +127,8 @@ $(document).ready(function(){
         <div class="control-group">
             <label class="control-label"><span class="req">*</span> Birthdate</label>
             <div class="controls">
-                <div class="input-append date" class="datepicker" id="datepicker" data-date-format="mm/dd/yyyy">
-                    <input class="span2" size="16" type="text" name="birthdate" required
+                <div class="input-append date" class="datepicker">
+                    <input class="span2 datepicker" size="16" type="text" name="birthdate" required
                         value="<?php if(!$reg) echo date('m/d/Y', strtotime($customer->birthdate)); ?>" />
                     <span class="add-on"><i class="icon-calendar"></i></span>
                 </div>   

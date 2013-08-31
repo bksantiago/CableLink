@@ -17,7 +17,7 @@
     });
     </script>";
 } ?>
-<form class="form-horizontal" id="agent-edit" method="POST" title="Update Successful!">
+<form class="form-horizontal" id="agent-edit" method="POST" data-title="Update Successful!">
     <fieldset>
         <legend>AGENT INFORMATION</legend>
         <h5>Account Information</h5>

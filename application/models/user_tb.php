@@ -83,6 +83,67 @@ class User_tb extends CI_Model{
         }
         return $result;
     }
+
+    public function getAgentForReport($txt = null){
+        $data = "(username like '%$txt%' or
+            first_name like '%$txt%' or
+            middle_name like '%$txt%' or
+            last_name like '%$txt%' or
+            email like '%$txt%') and
+            position > 1 and position < 5";
+
+        if($txt == null){
+            $query = $this->db->get_where("users_tb", array('position >' => 1, 'position <' => 5));
+        } else {
+            $this->db->from("users_tb");
+            $this->db->where("id", $txt);
+            $this->db->where("position >", 1);
+            $this->db->where("position <", 5);
+            $query = $this->db->get();
+
+            if($query->num_rows() == 0){
+                $this->db->from("users_tb");
+                $this->db->where($data);
+                $query = $this->db->get();
+            }
+        }
+
+        $customers = array();
+        foreach($query->result() as $row){
+            $customers[] = $this->convertToUser($row);
+        }
+        return $customers;
+    }
+
+    public function getContractorForReport($txt = null){
+        $data = "(username like '%$txt%' or
+            first_name like '%$txt%' or
+            middle_name like '%$txt%' or
+            last_name like '%$txt%' or
+            email like '%$txt%') and
+            position = 5";
+
+        if($txt == null){
+            $query = $this->db->get_where("users_tb", array('position' => 5));
+        } else {
+            $this->db->from("users_tb");
+            $this->db->where("id", $txt);
+            $this->db->where("position", 5);
+            $query = $this->db->get();
+
+            if($query->num_rows() == 0){
+                $this->db->from("users_tb");
+                $this->db->where($data);
+                $query = $this->db->get();
+            }
+        }
+
+        $customers = array();
+        foreach($query->result() as $row){
+            $customers[] = $this->convertToUser($row);
+        }
+        return $customers;
+    }
     
     public function getAllForReassign($positionId){
         $query = $this->db->get_where("users_tb", array('position >' => $positionId, 'position <' => 5));
@@ -132,7 +193,7 @@ class User_tb extends CI_Model{
             return "true";
         }
     }
-    
+
     private function convertToUser($row){
         $agent = new User_tb();
         $agent->id = $row->id;

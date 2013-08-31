@@ -29,7 +29,7 @@
            <input type="text" class="span2 uneditable-input" readonly="readonly"
                 value="<?php if($customer->applicationType == 0){echo "Cable";}
                     else if($customer->applicationType == 1){echo "Internet";}
-                    else if($customer->applicationType == 2){echo "Both";}?>" />
+                    else if($customer->applicationType == 2){echo "Internet and Cable";}?>" />
         </div>
     </div>
     <div class="control-group">
@@ -89,7 +89,7 @@
         </div>
     </div>
     <div class="control-group">
-        <h5>TICKET HISTORY</h5>
+        <h5>CALL LOGS HISTORY</h5>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -112,8 +112,8 @@
                         echo "<tr>";
                         echo "<td><a href='Tickets/view/" . $row->id . "' class='open-modal short-link' 
                                 title='View Complete Details'
-                                id='Ticket Information'>" . $row->id . "</a></td>";
-                        echo "<td><a href='profile?id=" . $row->assignedTb->id . "' class='short-link'>" . 
+                                data-header='Ticket Information'>" . $row->id . "</a></td>";
+                        echo "<td><a href='Profile?id=" . $row->assignedTb->id . "' class='short-link'>" . 
                                 $row->assignedTb->firstName . 
                                 " ( " . $row->assignedTb->positionTb->code . " )</a></td>";
                         echo "<td>" . date("F d, Y h:i A", strtotime($row->dateStart)) . "</td>";

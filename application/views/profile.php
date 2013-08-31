@@ -8,7 +8,7 @@
             <div class="profile-pic">
                 <?php if(isset($myProfile)) { ?>
                 <div class="upload">
-                    <form method="POST" id="profile-upload" action="profile/upload" enctype="multipart/form-data" style="margin: 0;">
+                    <form method="POST" id="profile-upload" action="Profile/upload" enctype="multipart/form-data" style="margin: 0;">
                         <input type="file" id="upload_pic" accept="image/png, image/gif, image/jpeg" name="file" style="position: absolute; opacity: 0; cursor: pointer;" />
                     </form>
                     <img src="images/upload.png" width="25" height="25" />Upload new picture (2mb)</div>
@@ -96,9 +96,9 @@
                     echo "<tr>";
                     echo "<td><a href='Tickets/view/" . $row->id . "' class='open-modal short-link' 
                             title='View Complete Details'
-                            id='Ticket Information'>" . $row->id . "</a></td>";
+                            data-header='Ticket Information'>" . $row->id . "</a></td>";
                     echo "<td><a href='Customers/view/" . $row->accountTb->id . "' class='open-modal short-link'
-                        id='Customer Information' title='View Customer Details'>" . 
+                        data-header='Customer Information' title='View Customer Details'>" . 
                             $row->accountTb->id . "</a></td>";
                     echo "<td>" . date("F d, Y h:i A", strtotime($row->dateStart)) . "</td>";
                     if(empty($row->dateEnd)){

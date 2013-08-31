@@ -1,10 +1,14 @@
 <script>
-    $(document).ready(function(){
+    $(document).ready(function(){        
+
         saveValidatedForm("Agents/save", "agent-registration")
         $("#username").rules("add", {remote:{
                 url: "Ajax/validateUsername?username=" + $("#username").val()}});
         $("#password").rules("add", {minlength: 4 });
         $("#cpassword").rules("add", {equalTo: "#password" });
+        $("#firstname").rules("add", {alphanumeric: "Enter a valid name"});
+        $("#middlename").rules("add", {alphanumeric: "Enter a valid name"});
+        $("#lastname").rules("add", {alphanumeric: "Enter a valid name"});
 
         $("#position").change(function(){
             if($(this).val() == 5){
@@ -17,7 +21,7 @@
         });
     });
 </script>
-<form class="form-horizontal" id="agent-registration" method="POST" title="Registration Successful!">
+<form class="form-horizontal" id="agent-registration" method="POST" data-title="Registration Successful!">
     <fieldset>
         <legend>AGENT REGISTRATION</legend>
         <h5>Account Information</h5>

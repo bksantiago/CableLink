@@ -10,8 +10,8 @@
             <div class="nav-collapse collapse">
                 <ul class="nav header-icon">
                     <li><a href="home"><i class="icon-home icon-white"></i> Home</a></li>
-                    <?php if ($user->id == 1) { ?>
-                        <li><a href="#about"><i class="icon-folder-open icon-white"></i> Accounts</a></li>
+                    <?php if ($user->positionTb->id == 1) { ?>
+                        <li><a href="Accounts"><i class="icon-folder-open icon-white"></i> Accounts</a></li>
                         <li><a href="Customers"><i class="icon-user icon-white"></i> Customers</a></li>
                         <li><a href="Agents"><i class="icon-eye-open icon-white"></i> Agents</a></li>
                     <?php } else { ?>
@@ -74,7 +74,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" id="btn-confirm">OK</button>
-        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn" id="btn-cancel" data-dismiss="modal">Cancel</button>
     </div>
 </div>
 

@@ -44,7 +44,7 @@ class Profile extends CI_Controller{
         if($user->positionTb->id == 5){
             $body["cities"] = $this->cc_tb->getByUserId($user->id);
             $body["schedules"] = $this->cs_tb->getByUserId($user->id);
-            $body["scheduleNum"] = convertToNumericalSchedule($this->cs_tb->getByUserId($user->id));
+            //$body["scheduleNum"] = convertToNumericalSchedule($this->cs_tb->getByUserId($user->id));
         }
         
         $this->load->view('templates/heads', $head);
@@ -80,7 +80,7 @@ class Profile extends CI_Controller{
             $id = $this->session->userdata("user")->id;
             rename($dir . $upload_data["file_name"], $dir . $id . '.jpg');
             
-            redirect("/profile?id=" . $id, "refresh");
+            redirect("/Profile?id=" . $id, "refresh");
         }
     }
 }

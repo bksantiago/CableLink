@@ -33,12 +33,12 @@ $(document).ready(function(){
                     echo "<td class='table-center'>";
                     if($user->positionTb->id == 1){
                         echo "<a href='Customers/edit/" . $row->id . "' class='open-modal'
-                                    title='Edit Customer Details' id='Customer Information'>
+                                    title='Edit Customer Details' data-header='Customer Information'>
                                     <i class='icon-edit icon-white'></i>
                                 </a>";
                     }
                     echo "<a href='Customers/view/" . $row->id . "' class='open-modal'
-                                title='View Complete Details' id='Customer Information'>
+                                title='View Complete Details' data-header='Customer Information'>
                                 <i class='icon-search icon-white'></i>
                             </a>
                         </td>";

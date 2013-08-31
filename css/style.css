@@ -10,6 +10,10 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
+    
+html, body{
+    height: 100%;
+}
 
 root { 
     display: block;
@@ -22,9 +26,20 @@ body{
     padding-bottom: 40px;
 }
 
+.container{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -2em;
+}
+
 .clearfix{
     padding: 0;
     margin: 0;
+}
+
+.right {
+    text-align: right !important;
 }
 
 #contents{
@@ -104,8 +119,11 @@ fieldset legend{
 body #dynamic-modal{
     width: 80%; /* desired relative width */
     left: 10%; /* (100%-width)/2 */
+    overflow-y: auto;
+    max-height: 80% !important;
     margin: auto auto auto auto; /* place center */
 }
+
 body #dynamic-modal.fade.in {
     top: auto; /* fade in to correct spot */
 }
@@ -115,10 +133,6 @@ body .modal-footer{
 
 body.modal-backdrop {
     overflow: hidden;
-}   
-
-.datepicker{
-    background-color: #08c;
 }
 
 .btn-transparent{
@@ -181,6 +195,10 @@ tr .table-center{
     color: #aaa;
 }
 
+.icon{
+    height: 40px;
+}
+
 .announce{
     white-space: pre-wrap;
 }
@@ -206,9 +224,40 @@ tr .table-center{
     display: none;
 }
 
+div.ui-datepicker{
+    color: #FFF;
+    background: rgba(0,0,0,.4);
+    font-size: 20px;
+    width: inherit;
+}
+
+.ui-datepicker-calendar td a.ui-state-default{
+    background: rgba(0,12,192,.5);
+    border-radius: 2px;
+    color: #FFF;
+}
+
+.ui-datepicker-calendar td a.ui-state-active{
+    background-image: linear-gradient(to bottom,#08c,#04c);
+    background-repeat: repeat-x;
+    border: 2px solid white;
+}
+
+.ui-datepicker-calendar td a.ui-state-highlight{
+    background-image: linear-gradient(to bottom,#08c,#04c);
+    background-repeat: repeat-x;
+    border: 3px solid yellow;
+}
+
+.fullDay a { background: #33CC66 !important; }
+
 footer{
+    height: 4em;
     margin: 15px;
     padding: 15px;
     border-top: 1px solid #888;
 }
 
+.push{
+    height: 4em;
+}

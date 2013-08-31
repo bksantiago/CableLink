@@ -40,6 +40,23 @@ class announcement_tb extends CI_Model{
         }
         return $this;
     }
+
+    public function getById($id){
+        $this->db->from("announcement_tb");
+        $this->db->where("id", $id);
+        $query = $this->db->get();
+        
+        $a = new announcement_tb();
+        foreach($query->result() as $row){
+            $a->id = $row->id;
+            $a->header = $row->header;
+            $a->information = $row->information;
+            $a->createdDate = $row->created_date;
+            $a->createdBy = $this->user_tb->getById($row->created_by);
+            $a->comments = $this->comment_tb->getByAnnouncementId($row->id);
+        }
+        return $a;
+    }
     
     public function getAll(){
         $this->db->order_by("created_date", "DESC");

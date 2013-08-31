@@ -27,6 +27,11 @@ class Welcome extends CI_Controller {
     
     public function index()
     {
+        $user = $this->session->userdata("user");
+        if($user != null){
+            header("location: home");
+        }
+
         $head["title"] = "Login Page";
         $head["base"] = base_url();
         $body["error"] = 0;

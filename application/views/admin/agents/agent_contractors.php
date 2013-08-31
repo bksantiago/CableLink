@@ -17,9 +17,9 @@
             echo "<td>" . $row->firstName . "</td>";
             echo "<td>" . $row->email . "</td>";
             echo "<td>" . $row->contactNo . "</td>";
-            echo "<td class='table-center'><a class='open-modal' title='View Details' id='Contractor Detials'
-                    href='Agents/view_contractor/" . $row->id . "'>
-                        <i class='icon-search icon-white'></i></a></td>";
+            echo "<td class='table-center'><a class='open-modal' title='View Available Schedule' data-header='Contractor Details'
+                        href='Tickets/view_contractor/" . $row->id . "'>
+                            <i class='icon-search icon-white'></i></a></td>";
             echo "</tr>";
         }
         ?>

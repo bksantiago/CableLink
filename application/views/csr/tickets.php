@@ -7,16 +7,13 @@
                     <li <?php if(empty($n)) echo "class='active'"; ?>><a href="Tickets/create">New Ticket</a></li>
                     <li><a href="Customers/customer_list">Customers List</a></li>
                     <li <?php if(!empty($n)) echo "class='active'"; ?>>
-                        <a href="Tickets/assigned">Assigned Ticket</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
+                        <a href="Tickets/assigned">Assigned Ticket</a></li>                    
+                    <li class="nav-header"><i class="icon-cog icon-white"></i> DISPATCHES</li>
+                    <li><a href="Tickets/upcoming_dispatches">Upcoming Dispatches</a></li>                    
+                    <li><a href="Tickets/finish_dispatch">Update Dispatches</a></li>
+                    <li class="nav-header"><i class="icon-cog icon-white"></i> CUSTOMERS</li>
+                    <li><a href="Customers/customer_registration">Customers Registration</a></li>
+                    <li><a href="Customers/customer_list">Customers List</a></li>
                     <li><a href="#">Link</a></li>
                     <li><a href="#">Link</a></li>
                     <li><a href="#">Link</a></li>

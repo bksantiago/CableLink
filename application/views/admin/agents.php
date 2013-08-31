@@ -8,16 +8,13 @@
                     <li><a href="Agents/agent_registration">Agent Registration</a></li>
                     <li><a href="Agents/contractors">List of Contractors</a></li>
                     <li class="nav-header"><i class="icon-cog icon-white"></i> ANNOUNCEMENTS</li>
-                    <li><a href="Agents/announcement">Agent Announcements</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li><a href="Agents/announcement">New Announcements</a></li>
+                    <li><a href="Agents/announcement_edit">Edit Current Announcement</a></li>
+                    <li><a href="Archive/announcement_archive">Announcement Archive</a></li>
+                    <li class="nav-header"><i class="icon-cog icon-white"></i> REPORTS</li>
+                    <li><a href="Agents/report_single">Per Agent Reporting</a></li>
+                    <li><a href="Agents/report_multiple">Agents Report</a></li>
+                    <li><a href="Agents/report_contractor">Contractor Reports</a></li>
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->

@@ -24,7 +24,7 @@ class comment_tb extends CI_Model{
     
     public function getByAnnouncementId($id){
         $this->db->where("announcement_id", $id);
-        $this->db->order_by("created_date", "DESC");
+        $this->db->order_by("created_date");
         $query = $this->db->get("comment_tb");
         
         $comments = array();

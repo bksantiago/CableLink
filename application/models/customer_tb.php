@@ -95,7 +95,7 @@ class Customer_tb extends CI_Model{
         switch($this->applicationType){
             case 0: return "Cable"; break;
             case 1: return "Internet"; break;
-            case 2: return "Both"; break;
+            case 2: return "Internet & Cable"; break;
             default : return ""; break;
         }
     }

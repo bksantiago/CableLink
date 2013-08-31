@@ -24,21 +24,25 @@ $(document).ready(function(){
     </thead>
     <tbody>
         <?php
-            foreach($agents as $row){
-                echo "<tr>";
-                echo "<td>" . $row->id . "</td>";
-                echo "<td>" . $row->getCompleteName() . "</td>";
-                echo "<td>" . $row->email . "</td>";
-                echo "<td>" . $row->contactNo . "</td>";
-                echo "<td>" . $row->positionTb->position . "</td>";
-                echo "<td>";
-                echo "<a href='Agents/edit/" . $row->id . "' class='open-modal'
-                                    title='Edit Agent Details' id='Agent Information'>
-                                    <i class='icon-edit icon-white'></i>
-                                </a>";
-                echo "<a href='Profile?id=" . $row->id ."' title='View Complete Profile'>
-                        <i class='icon-search icon-white'></i></a></td>";
-                echo "</tr>";
+            if(!empty($agents)){
+                foreach($agents as $row){
+                    echo "<tr>";
+                    echo "<td>" . $row->id . "</td>";
+                    echo "<td>" . $row->getCompleteName() . "</td>";
+                    echo "<td>" . $row->email . "</td>";
+                    echo "<td>" . $row->contactNo . "</td>";
+                    echo "<td>" . $row->positionTb->position . "</td>";
+                    echo "<td>";
+                    echo "<a href='Agents/edit/" . $row->id . "' class='open-modal'
+                                        title='Edit Agent Details' data-header='Agent Information'>
+                                        <i class='icon-edit icon-white'></i>
+                                    </a>";
+                    echo "<a href='Profile?id=" . $row->id ."' title='View Complete Profile'>
+                            <i class='icon-search icon-white'></i></a></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5'><div class='text-center'>NO RECORDS FOUND!</div></td></tr>";
             }
         ?>
     </tbody>

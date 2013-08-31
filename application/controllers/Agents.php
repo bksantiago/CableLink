@@ -16,6 +16,7 @@ class Agents extends CI_Controller{
         $this->load->model("user_tb", "", TRUE);
         $this->load->model("position_tb", "", TRUE);
         $this->load->model("city_tb", "", TRUE);
+        $this->load->model("ticket_assigned_tb", "ta_tb", TRUE);
         $this->load->model("announcement_tb", "", TRUE);
         $this->load->model("contractor_city_tb", "cc_tb", TRUE);
         $this->load->model("contractor_schedule_tb", "cs_tb", TRUE);
@@ -77,6 +78,23 @@ class Agents extends CI_Controller{
             'created_by' => $this->session->userdata("user")->id
         );
         $this->db->insert("announcement_tb", $data);
+        echo "save;top";
+    }
+
+    function announcement_edit(){
+        $body["announcement"] = $this->announcement_tb->get();
+        $this->load->view("admin/agents/agent_announcement_edit", $body);
+    }
+
+    function announcement_update(){
+        $data = array(
+            'header' => $this->input->post("header"),
+            'information' => $this->input->post("information"),
+            'created_date' => date("Y-m-d H:i:s"),
+            'created_by' => $this->session->userdata("user")->id
+        );
+        $this->db->where("id", $this->input->post("id"));
+        $this->db->update("announcement_tb", $data);
         echo "save;top";
     }
 
@@ -184,6 +202,12 @@ class Agents extends CI_Controller{
                 }
             }
         }
+
+        //update session if same
+        if($this->session->userdata("user")->id == $userId){
+            $this->session->set_userdata("user", $this->user_tb->getById($userId));
+        }
+
         echo "update;bottom";
     }
     
@@ -192,8 +216,74 @@ class Agents extends CI_Controller{
         $this->load->view("admin/agents/agent_contractors", $body);
     }
 
-    function view_contractor($id){
-        echo "a";
+    function report_single(){
+        if($this->input->get("search") != ""){
+            $body["search"] = $this->input->get("search");
+            $body["agents"] = $this->user_tb->getAgentForReport($body["search"]);
+        } else {
+           $body["agents"] = $this->user_tb->getAgentForReport();
+        }
+        $this->load->view("admin/agents/reports/agent_single_list", $body);
+    }
+
+    function generate_single($agentId){
+        $body["agent"] = $this->user_tb->getById($agentId);
+
+        if($this->input->get("dateFrom") != ""){
+            $dateFrom = $this->input->get("dateFrom");
+            $dateTo = $this->input->get("dateTo");
+
+            $assignedReport = $this->ta_tb->getReportByUserFromTo($agentId, $dateFrom, $dateTo);
+
+            $body["totalHandled"] = count($assignedReport);
+            $body["totalResolve"] = $this->ta_tb->getTotalResolve($assignedReport);
+            $body["minHandledTime"] = $this->ta_tb->getMinHandletime($assignedReport) . " hours";
+            $body["maxHandledTime"] = $this->ta_tb->getMaxHandletime($assignedReport) . " hours";
+            $body["averageHandledTime"] = $this->ta_tb->getAverageHandletime($assignedReport) . " hours";
+
+            $body["dateFrom"] = $dateFrom;
+            $body["dateTo"] = $dateTo;
+        }
+        $this->load->view("admin/agents/reports/agent_single_generated", $body);
+    }
+
+    function report_multiple(){
+        $this->load->view("admin/agents/reports/agent_multiple_list");
+    }
+
+    function generate_multiple($p = "2-3-4"){
+        $pos = explode("-", $p);
+        $positions = array();
+        $positionString = array();
+
+        foreach($pos as $pp){
+            $positionString[] = $pp;
+            $positions[] = $this->position_tb->getPositionById($pp);            
+        }
+        $body["positions"] = $positions;
+
+        if($this->input->get("dateFrom") != ""){
+            $dateFrom = $this->input->get("dateFrom");
+            $dateTo = $this->input->get("dateTo");
+
+            $assignedReports = $this->ta_tb->getReportByPositionFromTo($positionString, $dateFrom, $dateTo);            
+
+            $body["agents"] = $assignedReports;
+            $body["dateFrom"] = $dateFrom;
+            $body["dateTo"] = $dateTo;
+        }
+
+        $this->load->view("admin/agents/reports/agent_multiple_generated", $body);
+    }
+
+    function report_contractor(){
+        if($this->input->get("search") != ""){
+            $body["search"] = $this->input->get("search");
+            $body["agents"] = $this->user_tb->getContractorForReport($body["search"]);
+        } else {
+           $body["agents"] = $this->user_tb->getContractorForReport();
+        }        
+        $this->load->view("admin/agents/reports/agent_contractor_list", $body);
     }
 }
 ?>
